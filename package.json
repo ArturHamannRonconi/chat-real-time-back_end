@@ -1,0 +1,8 @@
+{
+  "name": "chat-real-time",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ArturHamannRonconi/chat-real-time.git",
+  "author": "ArturHamannRonconi <arturhronconi@gmail.com>",
+  "license": "MIT"
+}
