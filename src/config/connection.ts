@@ -1,3 +1,3 @@
-import getConnection from '../infra/database'
+import getConnection from '../app/database'
 
 getConnection()
