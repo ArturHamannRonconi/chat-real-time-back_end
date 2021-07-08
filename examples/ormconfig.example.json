@@ -1,0 +1,13 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 1234,
+  "username": "test",
+  "password": "test",
+  "database": "test",
+  "entities": ["src/modules/**/entities/implementations/*.ts"],
+  "migrations": ["src/infra/database/migrations/*.ts"],
+  "cli": { "migrationsDir": "src/infra/database/migrations" },
+  "migrationsRun": true,
+  "uuidExtention": "pgcrypto"
+}
