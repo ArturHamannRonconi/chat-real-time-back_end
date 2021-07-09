@@ -1,4 +1,4 @@
-import UserData from '../../../../@types/appTypes/userTypes/UserData'
+import UserData from '@appTypes/userTypes/UserData'
 
 interface IUserRepository
 {

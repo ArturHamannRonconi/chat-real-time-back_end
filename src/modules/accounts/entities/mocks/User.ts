@@ -1,4 +1,4 @@
-import IUser from '../interfaces/IUser'
+import IUser from '@accounts/entities/interfaces/IUser'
 
 class User implements IUser 
 {

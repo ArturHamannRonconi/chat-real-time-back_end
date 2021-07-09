@@ -1,8 +1,8 @@
 import { v4 as generateUUID } from 'uuid'
 
-import UserData from '../../../../@types/appTypes/userTypes/UserData'
-import User from '../../entities/mocks/User'
-import IUserRepository from '../interfaces/IUserRepository'
+import IUserRepository from '@accounts/repositories/interfaces/IUserRepository'
+import UserData from '@appTypes/userTypes/UserData'
+import User from '@accounts/entities/mocks/User'
 
 class UserRepository implements IUserRepository
 {

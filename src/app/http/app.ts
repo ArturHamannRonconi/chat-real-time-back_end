@@ -2,7 +2,7 @@ import express from 'express'
 import 'express-async-errors'
 import cors from 'cors'
 
-import routes from './routes'
+import routes from '@app/http/routes'
 
 const app = express()
 
