@@ -24,6 +24,21 @@ class UserRepository implements IUserRepository
 
     this.repository.push(user)
   }
+
+  public async getById(id: string): Promise<User>
+  {
+    return this.repository.find(user => user.id === id)
+  }
+
+  public async getByEmail(email: string): Promise<User>
+  {
+    return this.repository.find(user => user.email === email)
+  }
+
+  public async getByUsername(username: string): Promise<User>
+  {
+    return this.repository.find(user => user.username === username)
+  }
 }
 
 export default UserRepository
