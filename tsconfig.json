@@ -12,6 +12,7 @@
       "@app/*": ["app/*"],
       "@appTypes/*": ["@types/appTypes/*"],
       "@config/*": ["config/*"],
+      "@errors/*": ["errors/*"],
       "@accounts/*": ["modules/accounts/*"],
       "@utils/*": ["utils/*"]
     },
