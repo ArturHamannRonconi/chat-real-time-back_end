@@ -1,13 +1,16 @@
+import { inject, injectable } from 'tsyringe'
 import { hash } from 'bcryptjs'
 
 import IUserRepository from '@accounts/repositories/interfaces/IUserRepository'
-import BadRequestError from 'shared/errors/BadRequestError'
+import BadRequestError from '@shared/errors/BadRequestError'
+import ConflictError from '@shared/errors/ConflictError'
 import UserData from '@appTypes/userTypes/UserData'
-import ConflictError from 'shared/errors/ConflictError'
 
+@injectable()
 class CreateUserService
 {
   constructor(
+    @inject('UserRepository')
     private userRepository: IUserRepository
   ) {  }
 
@@ -43,12 +46,12 @@ class CreateUserService
 
   private async verifyUsernameAlreadyExists(username: string): Promise<boolean>
   {
-    return !!this.userRepository.getByUsername(username)
+    return !!await this.userRepository.getByUsername(username)
   }
 
   private async verifyEmailAlreadyExists(email: string): Promise<boolean>
   {
-    return !!this.userRepository.getByEmail(email)
+    return !!await this.userRepository.getByEmail(email)
   }
 
   private async createUser(userData: UserData): Promise<void>

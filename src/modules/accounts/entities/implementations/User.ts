@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
-import IUser from '../interfaces/IUser'
+
+import IUser from '@accounts/entities/interfaces/IUser'
 
 @Entity('users')
 class User implements IUser

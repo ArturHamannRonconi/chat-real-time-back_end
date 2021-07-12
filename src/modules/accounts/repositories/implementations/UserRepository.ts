@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm'
 
-import IUserRepository from '../interfaces/IUserRepository'
+import IUserRepository from '@accounts/repositories/interfaces/IUserRepository'
 import User from '@accounts/entities/implementations/User'
 import UserData from '@appTypes/userTypes/UserData'
 
