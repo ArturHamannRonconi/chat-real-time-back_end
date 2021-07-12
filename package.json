@@ -41,7 +41,7 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "dev": "ts-node-dev -r tsconfig-paths/register --ignore-watch node_modules --transpile-only --respawn --clear src/shared/app/http/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --ignore-watch node_modules --transpile-only --respawn --clear src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev node_modules/typeorm/cli.js",
     "test": "NODE_ENV=test jest -i"
   }

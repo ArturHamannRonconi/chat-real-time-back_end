@@ -2,7 +2,7 @@ import UserData from '@appTypes/userTypes/UserData'
 
 class PrePreparedData
 {
-  public static getUserData(): UserData
+  public getUserData(): UserData
   {
     return {
       username: 'user',
@@ -11,7 +11,7 @@ class PrePreparedData
     }
   }
 
-  public static getUserDataWithInvalidPassword(): UserData
+  public getUserDataWithInvalidPassword(): UserData
   {
     return {
       username: 'invalidPassword',
@@ -19,6 +19,15 @@ class PrePreparedData
       password: 'invalidPassword'
     }
   }
+
+  public getUserWithInvalidFieldTypes(): Record<string, unknown>
+  {
+    return {
+      email: 32,
+      username: true,
+      password: 'a12'
+    }
+  }
 }
 
-export default PrePreparedData
+export default new PrePreparedData()

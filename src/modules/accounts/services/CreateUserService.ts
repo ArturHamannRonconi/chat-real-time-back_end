@@ -17,8 +17,8 @@ class CreateUserService
   public async execute(userData: UserData): Promise<void>
   {
     const userDataHasInvalidFieldTypes = this.ensureCorrectTypes(userData)
-    if(userDataHasInvalidFieldTypes) new BadRequestError('Invalid field types')
-
+    if(userDataHasInvalidFieldTypes) throw new BadRequestError('Invalid field types')
+    
     const [ passwordHash, usernameAlreadyExists, emailAlreadyExists ] =
       await Promise.all([
         this.getPasswordHash(userData.password),

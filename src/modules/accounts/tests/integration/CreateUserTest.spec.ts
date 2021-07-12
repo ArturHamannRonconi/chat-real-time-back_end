@@ -9,6 +9,7 @@ describe('Create user integration test', () => {
   let connection: Connection
   
   const user = prePreparedData.getUserData()
+  const userWithInvalidFieldTypes = prePreparedData.getUserWithInvalidFieldTypes()
 
   beforeAll(async () => connection = await getConnection())
   afterAll(async () => {
@@ -17,9 +18,36 @@ describe('Create user integration test', () => {
   })
   
   it('Should be able to create a user', async () => {
-    request(app)
+    await request(app)
       .post('/users')
       .send(user)
       .expect(201)
+  })
+
+  it('Should not be able to create a user with invalid field types', async () => {
+    const response = await request(app)
+      .post('/users')
+      .send(userWithInvalidFieldTypes)
+      .expect(400)
+
+    expect(response.body).toHaveProperty('message', 'Invalid field types')
+  })
+
+  it('Should not be able to create a user with username already exists', async () => {
+    const response = await request(app)
+      .post('/users')
+      .send(user)
+      .expect(409)
+
+    expect(response.body).toHaveProperty('message', 'Username already exists')
+  })
+
+  it('Should not be able to create a user with email already exists', async () => {
+    const response = await request(app)
+      .post('/users')
+      .send({ ...user, username: 'newUserName' })
+      .expect(409)
+
+    expect(response.body).toHaveProperty('message', 'Email already exists')
   })
 })

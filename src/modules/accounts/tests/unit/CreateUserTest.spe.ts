@@ -1,13 +1,13 @@
 import UserRepository from '@accounts/repositories/mocks/UserRepository'
 import CreateUserService from '@accounts/services/CreateUserService'
 import ConflictError from '@shared/errors/ConflictError'
-import PrePreparedData from '@utils/PrePreparedData'
+import prePreparedData from '@utils/PrePreparedData'
 
 describe('Creae user unit test', () => {
   let createUserService: CreateUserService
   let userRepository: UserRepository
   
-  const userData = PrePreparedData.getUserData()
+  const userData = prePreparedData.getUserData()
 
   beforeAll(() => {
     userRepository = new UserRepository()
