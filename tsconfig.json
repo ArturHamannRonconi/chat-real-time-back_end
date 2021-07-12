@@ -9,12 +9,12 @@
     "skipLibCheck": true,
     "baseUrl": "./src",
     "paths": {
-      "@app/*": ["app/*"],
       "@appTypes/*": ["@types/appTypes/*"],
       "@config/*": ["config/*"],
-      "@errors/*": ["errors/*"],
       "@accounts/*": ["modules/accounts/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@shared/*": ["shared/*"],
+      
     },
     "forceConsistentCasingInFileNames": true
   }

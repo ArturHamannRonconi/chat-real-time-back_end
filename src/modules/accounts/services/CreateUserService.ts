@@ -1,10 +1,9 @@
-import PasswordValidator from 'password-validator'
-import { genSalt, hash } from 'bcryptjs'
+import { hash } from 'bcryptjs'
 
 import IUserRepository from '@accounts/repositories/interfaces/IUserRepository'
-import BadRequestError from '@errors/BadRequestError'
+import BadRequestError from 'shared/errors/BadRequestError'
 import UserData from '@appTypes/userTypes/UserData'
-import ConflictError from '@errors/ConflictError'
+import ConflictError from 'shared/errors/ConflictError'
 
 class CreateUserService
 {
@@ -12,86 +11,44 @@ class CreateUserService
     private userRepository: IUserRepository
   ) {  }
 
-  public async execute({ username, email, password }: UserData): Promise<void>
+  public async execute(userData: UserData): Promise<void>
   {
-    this.protectedUserData({ username, email, password })
-    
-    const [ hash ] = await this
-      .getHashVerifyEmailAndUsername({username, email, password })
+    const userDataHasInvalidFieldTypes = this.ensureCorrectTypes(userData)
+    if(userDataHasInvalidFieldTypes) new BadRequestError('Invalid field types')
 
-    this.verifyPasswordIsValid(password)
-    await this.createUser({ username, email, password: hash })
+    const [ passwordHash, usernameAlreadyExists, emailAlreadyExists ] =
+      await Promise.all([
+        this.getPasswordHash(userData.password),
+        this.verifyUsernameAlreadyExists(userData.username),
+        this.verifyEmailAlreadyExists(userData.email)
+      ])
+
+    if(usernameAlreadyExists) throw new ConflictError('Username already exists')
+    if(emailAlreadyExists) throw new ConflictError('Email already exists')
+
+    await this.createUser({ ...userData, password: passwordHash })
   }
 
-  private protectedUserData({ username, email, password }: UserData): void
+  private ensureCorrectTypes({ username, email, password }: UserData): boolean
   {
-    const userDataHasInvalidFieldTypes =
-      typeof username !== 'string'||
-      typeof email !== 'string' ||
-      typeof password !== 'string'
-
-    if(userDataHasInvalidFieldTypes)
-      new BadRequestError('Invalid field types')
-
-    const userDataHasNullableFields =
-      !username ||
-      !email ||
-      !password
-
-    if(userDataHasNullableFields)
-      new BadRequestError('Invalid nullable field')
-  }
-
-  private async getHashVerifyEmailAndUsername({ username, email, password }: UserData): Promise<[string, void, void]>
-  {
-    return Promise.all([
-      this.getPasswordHash(password),
-      this.verifyUsernameAlreadyExists(username),
-      this.verifyEmailAlreadyExists(email)
-    ])
+    return typeof username !== 'string'
+    || typeof email !== 'string'
+    || typeof password !== 'string'
   }
 
   private async getPasswordHash(password: string): Promise<string>
   {
-    const salt = await genSalt()
-    return hash(password, salt)
+    return hash(password, 10)
   }
 
-  private async verifyUsernameAlreadyExists(username: string): Promise<void>
+  private async verifyUsernameAlreadyExists(username: string): Promise<boolean>
   {
-    const usernameAlreadyExists = await this
-      .userRepository
-      .getByUsername(username)
-
-    if(usernameAlreadyExists)
-      throw new ConflictError('Username already exists')
+    return !!this.userRepository.getByUsername(username)
   }
 
-  private async verifyEmailAlreadyExists(email: string): Promise<void>
+  private async verifyEmailAlreadyExists(email: string): Promise<boolean>
   {
-    const emailAlreadyExists = await this
-      .userRepository
-      .getByEmail(email)
-
-    if(emailAlreadyExists)
-      throw new ConflictError('Email already exists')
-  }
-
-  private verifyPasswordIsValid(password: string): void
-  {
-    const schema = new PasswordValidator()
-    schema
-      .is().min(8)
-      .is().max(100)
-      .has().uppercase()
-      .has().lowercase()
-      .has().digits(2)
-      .has().not().spaces()
-
-    const passwordIsValid = schema.validate(password)
-
-    if(!passwordIsValid)
-      throw new BadRequestError('Invalid password')
+    return !!this.userRepository.getByEmail(email)
   }
 
   private async createUser(userData: UserData): Promise<void>

@@ -1,3 +1,3 @@
-import getConnection from '@app/database'
+import getConnection from 'shared/app/database'
 
 getConnection()

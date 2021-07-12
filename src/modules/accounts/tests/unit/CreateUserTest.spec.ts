@@ -1,8 +1,8 @@
 import UserRepository from '@accounts/repositories/mocks/UserRepository'
 import CreateUserService from '@accounts/services/CreateUserService'
-import BadRequestError from '@errors/BadRequestError'
+import BadRequestError from 'shared/errors/BadRequestError'
 import PrePreparedData from '@utils/PrePreparedData'
-import ConflictError from '@errors/ConflictError'
+import ConflictError from 'shared/errors/ConflictError'
 
 describe('Creae user unit test', () => {
   let createUserService: CreateUserService
