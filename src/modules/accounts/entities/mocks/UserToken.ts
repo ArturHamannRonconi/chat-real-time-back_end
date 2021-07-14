@@ -1,6 +1,6 @@
-import IToken from '../interfaces/IToken'
+import IUserToken from '../interfaces/IUserToken'
 
-class Token implements IToken
+class UserToken implements IUserToken
 {
   id: string
   token: string
@@ -10,4 +10,4 @@ class Token implements IToken
   created_at: Date
 }
 
-export default Token
+export default UserToken

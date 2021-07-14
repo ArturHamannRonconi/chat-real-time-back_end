@@ -1,4 +1,4 @@
-interface IToken
+interface IUserToken
 {
   id: string
   token: string
@@ -8,4 +8,4 @@ interface IToken
   created_at: Date
 }
 
-export default IToken
+export default IUserToken
