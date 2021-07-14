@@ -1,8 +1,8 @@
-interface TokenData
+interface UserTokenData
 {
   token: string
   expires_date: string
   user_id: string
 }
 
-export default TokenData
+export default UserTokenData
