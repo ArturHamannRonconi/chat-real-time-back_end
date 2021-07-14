@@ -1,7 +1,7 @@
 interface UserTokenData
 {
   token: string
-  expires_date: string
+  expires_date: Date
   user_id: string
 }
 
