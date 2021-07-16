@@ -1,4 +1,4 @@
-import UserTokenData from '@appTypes/userTypes/UserTokenData'
+import UserTokenData from '@appTypes/accountsTypes/UserTokenData'
 
 interface IUserTokenRepository
 {

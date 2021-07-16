@@ -1,5 +1,5 @@
 import IUser from '@accounts/entities/interfaces/IUser'
-import UserData from '@appTypes/userTypes/UserData'
+import UserData from '@appTypes/accountsTypes/UserData'
 
 interface IUserRepository
 {
