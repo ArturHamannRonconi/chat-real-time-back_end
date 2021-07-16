@@ -15,6 +15,7 @@ export default {
     '@appTypes/(.*)': ['<rootDir>/src/@types/appTypes/$1'],
     '@config/(.*)': ['<rootDir>/src/config/$1'],
     '@accounts/(.*)': ['<rootDir>/src/modules/accounts/$1'],
+    '@chats/(.*)': ['<rootDir>/src/modules/chats/$1'],
     '@shared/(.*)': ['<rootDir>/src/shared/$1'],
     '@utils/(.*)': ['<rootDir>/src/utils/$1']
   }

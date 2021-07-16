@@ -12,6 +12,7 @@
       "@appTypes/*": ["@types/appTypes/*"],
       "@config/*": ["config/*"],
       "@accounts/*": ["modules/accounts/*"],
+      "@chats/*": ["modules/chats/*"],
       "@utils/*": ["utils/*"],
       "@shared/*": ["shared/*"],
       
