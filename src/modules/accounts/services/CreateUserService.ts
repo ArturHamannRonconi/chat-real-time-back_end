@@ -4,7 +4,7 @@ import { hash } from 'bcryptjs'
 import IUserRepository from '@accounts/repositories/interfaces/IUserRepository'
 import BadRequestError from '@shared/errors/BadRequestError'
 import ConflictError from '@shared/errors/ConflictError'
-import UserData from '@appTypes/userTypes/UserData'
+import UserData from '@appTypes/accountsTypes/UserData'
 
 @injectable()
 class CreateUserService
