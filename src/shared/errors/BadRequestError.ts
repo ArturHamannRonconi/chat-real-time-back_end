@@ -1,4 +1,4 @@
-import AppError from './AppError'
+import AppError from '@shared/errors/AppError'
 
 class BadRequestError extends AppError
 {
