@@ -1,4 +1,4 @@
-import UserData from '@appTypes/userTypes/UserData'
+import UserData from '@appTypes/accountsTypes/UserData'
 
 class PrePreparedData
 {
