@@ -1,8 +1,8 @@
 import { v4 as generateUUID } from 'uuid'
 
+import IUserTokenRepository from '@accounts/repositories/interfaces/IUserTokenRepository'
+import UserTokenData from '@appTypes/accountsTypes/UserTokenData'
 import UserToken from '@accounts/entities/mocks/UserToken'
-import UserTokenData from '@appTypes/userTypes/UserTokenData'
-import IUserTokenRepository from '../interfaces/IUserTokenRepository'
 
 class UserTokenRepository implements IUserTokenRepository
 {
