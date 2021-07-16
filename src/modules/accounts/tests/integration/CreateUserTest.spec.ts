@@ -1,21 +1,25 @@
 import request from 'supertest'
 import { Connection } from 'typeorm'
 
-import app from '@shared/infra/http/app'
-import getConnection from '@shared/infra/database'
+import PrepareTestEnviroment from '@utils/PrepareTestEnviroment'
+import UserData from '@appTypes/accountsTypes/UserData'
 import prePreparedData from '@utils/PrePreparedData'
+import app from '@shared/infra/http/app'
 
 describe('Create user integration test', () => {
+  let userWithInvalidFieldTypes: Record<string, unknown>
+  let prepare: PrepareTestEnviroment
   let connection: Connection
-  
-  const user = prePreparedData.getUserData()
-  const userWithInvalidFieldTypes = prePreparedData.getUserWithInvalidFieldTypes()
+  let user: UserData
 
-  beforeAll(async () => connection = await getConnection())
-  afterAll(async () => {
-    await connection.dropDatabase()
-    await connection.close()
+  beforeAll(async () => {
+    prepare = new PrepareTestEnviroment(request(app))
+    connection = await prepare.getTestConnection()
+    
+    user = prePreparedData.getUserData()
+    userWithInvalidFieldTypes = prePreparedData.getUserWithInvalidFieldTypes()
   })
+  afterAll(async () => await prepare.closeTestConnection(connection))
   
   it('Should be able to create a user', async () => {
     await request(app)
