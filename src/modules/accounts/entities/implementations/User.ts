@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 
+import UserToken from '@accounts/entities/implementations/UserToken'
 import IUser from '@accounts/entities/interfaces/IUser'
 
 @Entity('users')
@@ -16,7 +17,10 @@ class User implements IUser
 
   @Column()
   password: string
-  
+
+  @OneToMany(() => UserToken, token => token.user)
+  tokens: UserToken[]
+
   @UpdateDateColumn()
   updated_at: Date
 
