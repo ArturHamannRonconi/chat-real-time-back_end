@@ -1,17 +1,21 @@
+import IUserRepository from '@accounts/repositories/interfaces/IUserRepository'
 import UserRepository from '@accounts/repositories/mocks/UserRepository'
 import CreateUserService from '@accounts/services/CreateUserService'
 import ConflictError from '@shared/errors/ConflictError'
+import UserData from '@appTypes/accountsTypes/UserData'
 import prePreparedData from '@utils/PrePreparedData'
 
 describe('Creae user unit test', () => {
   let createUserService: CreateUserService
-  let userRepository: UserRepository
-  
-  const userData = prePreparedData.getUserData()
+  let userRepository: IUserRepository
+  let userData: UserData
 
+  
   beforeAll(() => {
     userRepository = new UserRepository()
     createUserService = new CreateUserService(userRepository)
+    
+    userData = prePreparedData.getUserData()
   })
 
   it('Should be able to create a user', async () => {
