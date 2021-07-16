@@ -1,12 +1,12 @@
-import {MigrationInterface, QueryRunner, Table} from 'typeorm'
+import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
-export class CreateTokens1626284606835 implements MigrationInterface
+export class CreateUserTokens1626284606835 implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void>
   {
     await queryRunner.createTable(
       new Table({
-        name: 'tokens',
+        name: 'user_tokens',
         columns: [
           { name: 'id', type: 'uuid', isPrimary: true, isGenerated: true, generationStrategy: 'uuid' },
           { name: 'user_id', type: 'uuid' },
@@ -17,7 +17,7 @@ export class CreateTokens1626284606835 implements MigrationInterface
         ],
         foreignKeys: [
           {
-            name: 'fk_tokens_user_id',
+            name: 'fk_user_tokens_user_id',
             columnNames: ['user_id'],
             referencedTableName: 'users',
             referencedColumnNames: ['id']
@@ -29,6 +29,6 @@ export class CreateTokens1626284606835 implements MigrationInterface
 
   public async down(queryRunner: QueryRunner): Promise<void>
   {
-    await queryRunner.dropTable('tokens')
+    await queryRunner.dropTable('user_tokens')
   }
 }
