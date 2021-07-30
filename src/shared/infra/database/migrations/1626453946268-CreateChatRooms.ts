@@ -9,15 +9,15 @@ export class CreateChatRooms1626453946268 implements MigrationInterface
         name: 'chat_rooms',
         columns: [
           { name: 'id', type: 'uuid', isPrimary: true, isGenerated: true, generationStrategy: 'uuid' },
-          { name: 'owner', type: 'uuid' },
-          { name: 'chat_scope', type: 'enum', enum: ['public', 'private'], default: 'public' },
+          { name: 'owner_id', type: 'uuid' },
+          { name: 'chat_scope', type: 'enum', enum: ['public', 'private'] },
           { name: 'max_amount_users', type: 'int', default: 10 },
           { name: 'created_at', type: 'timestamp', default: 'NOW()' }
         ],
         foreignKeys: [
           {
             name: 'fk_chat_rooms_user_id',
-            columnNames: ['owner'],
+            columnNames: ['owner_id'],
             referencedTableName: 'users',
             referencedColumnNames: ['id']
           }
