@@ -5,8 +5,7 @@ import { compare } from 'bcryptjs'
 import IUserTokenRepository from '@accounts/repositories/interfaces/IUserTokenRepository'
 import IDateProvider from '@shared/container/providers/interfaces/IDateProvider'
 import IUserRepository from '@accounts/repositories/interfaces/IUserRepository'
-import UnauthorizedError from '@shared/errors/UnauthorizedError'
-import BadRequestError from '@shared/errors/BadRequestError'
+import { BadRequestError, UnauthorizedError }from '@shared/errors'
 import Tokens from '@appTypes/accountsTypes/Tokens'
 import Login from '@appTypes/accountsTypes/Login'
 import AuthConfig from '@config/AuthConfig'
@@ -58,7 +57,7 @@ class CreateUserTokensService
 
     const credentials = Buffer
       .from(hash, 'base64')
-      .toString('ascii')
+      .toString()
       
     const [ email, password ] = credentials.split(':')
 

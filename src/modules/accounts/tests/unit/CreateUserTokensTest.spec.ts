@@ -6,9 +6,9 @@ import UserTokenRepository from '@accounts/repositories/mocks/TokenRepository'
 import CreateUserTokensService from '@accounts/services/CreateUserTokensService'
 import UserRepository from '@accounts/repositories/mocks/UserRepository'
 import CreateUserService from '@accounts/services/CreateUserService'
-import UnauthorizedError from '@shared/errors/UnauthorizedError'
 import UserData from '@appTypes/accountsTypes/UserData'
 import PrePreparedData from '@utils/PrePreparedData'
+import { UnauthorizedError } from '@shared/errors'
 
 describe('Create user tokens unit test', () => {
   let createUserTokensService: CreateUserTokensService

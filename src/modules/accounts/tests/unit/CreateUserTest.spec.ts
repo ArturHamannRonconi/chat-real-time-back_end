@@ -1,9 +1,9 @@
 import IUserRepository from '@accounts/repositories/interfaces/IUserRepository'
 import UserRepository from '@accounts/repositories/mocks/UserRepository'
 import CreateUserService from '@accounts/services/CreateUserService'
-import ConflictError from '@shared/errors/ConflictError'
 import UserData from '@appTypes/accountsTypes/UserData'
 import prePreparedData from '@utils/PrePreparedData'
+import { ConflictError } from '@shared/errors'
 
 describe('Creae user unit test', () => {
   let createUserService: CreateUserService

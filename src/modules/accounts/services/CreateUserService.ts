@@ -2,8 +2,7 @@ import { inject, injectable } from 'tsyringe'
 import { hash } from 'bcryptjs'
 
 import IUserRepository from '@accounts/repositories/interfaces/IUserRepository'
-import BadRequestError from '@shared/errors/BadRequestError'
-import ConflictError from '@shared/errors/ConflictError'
+import { BadRequestError, ConflictError } from '@shared/errors'
 import UserData from '@appTypes/accountsTypes/UserData'
 
 @injectable()
