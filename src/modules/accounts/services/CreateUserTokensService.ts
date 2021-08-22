@@ -33,7 +33,7 @@ class CreateUserTokensService
     if(!user || !passwordCorrect)
       throw new UnauthorizedError('Incorrect email and/or password') 
  
-    const tokens = this.getTokens(user.username)
+    const tokens = this.getTokens(user.username, user.id)
     await this.addToken(tokens.refresh_token, user.id)
     
     return tokens
@@ -64,15 +64,15 @@ class CreateUserTokensService
     return { email, password }
   }
 
-  private getTokens(username: string): Tokens
+  private getTokens(username: string, user_id: string): Tokens
   {
     const access_token = sign(
-      { username },
+      { username, user_id },
       AuthConfig.getAccessSecret(),
       { expiresIn: AuthConfig.getAccessExpiration() }
     )
     const refresh_token = sign(
-      { username },
+      { username, user_id },
       AuthConfig.getRefreshSecret(),
       { expiresIn: AuthConfig.getRefreshExpiration() }
     )
