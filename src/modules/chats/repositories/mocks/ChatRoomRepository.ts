@@ -3,6 +3,7 @@ import { v4 as generateUUID } from 'uuid'
 import IChatRoomRepository from '@chats/repositories/interfaces/IChatRoomRepository'
 import ChatRoomData from '@appTypes/chatsTypes/ChatRoomData'
 import ChatRoom from '@chats/entities/mocks/ChatRoom'
+import IChatRoom from '@chats/entities/interfaces/IChatRoom'
 
 class ChatRoomRepository implements IChatRoomRepository
 {
@@ -22,6 +23,16 @@ class ChatRoomRepository implements IChatRoomRepository
     })
 
     this.repository.push(chatRoom)
+  }
+
+  public async findById(id: string): Promise<IChatRoom>
+  {
+    return this.repository.find(chat => chat.id === id)
+  }
+
+  public async findByOwnerId(owner_id: string): Promise<IChatRoom>
+  {
+    return this.repository.find(chat => chat.owner_id === owner_id)
   }
 
   public async deleteById(id: string): Promise<void>
