@@ -3,6 +3,7 @@ import request from 'supertest'
 
 import UserData from '@appTypes/accountsTypes/UserData'
 import getConnection from '@shared/infra/database'
+import Tokens from '@appTypes/accountsTypes/Tokens'
 
 class PrepareTestEnviroment
 {
@@ -16,7 +17,7 @@ class PrepareTestEnviroment
   public async createUser(user: UserData): Promise<void>
   {
     await this.request
-      .post('/users')
+      .post('/user')
       .send(user)
   }
 
@@ -29,6 +30,15 @@ class PrepareTestEnviroment
   {
     await connection.dropDatabase()
     await connection.close()
+  }
+
+  public async getAccessToken(email: string, password: string): Promise<Tokens>
+  {
+    const response = await this.request
+      .post('/user/login')
+      .auth(email, password)
+
+    return response.body
   }
 }
 
