@@ -1,4 +1,5 @@
 import IUserToken from '@accounts/entities/interfaces/IUserToken'
+import IChatRoom from '@chats/entities/interfaces/IChatRoom'
 
 interface IUser
 {
@@ -7,6 +8,7 @@ interface IUser
   email: string
   password: string
   tokens: IUserToken[]
+  room: IChatRoom
   updated_at: Date
   created_at: Date
 }
