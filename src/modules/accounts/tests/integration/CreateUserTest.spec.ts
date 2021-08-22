@@ -23,14 +23,14 @@ describe('Create user integration test', () => {
   
   it('Should be able to create a user', async () => {
     await request(app)
-      .post('/users')
+      .post('/user')
       .send(user)
       .expect(201)
   })
 
   it('Should not be able to create a user with invalid field types', async () => {
     const response = await request(app)
-      .post('/users')
+      .post('/user')
       .send(userWithInvalidFieldTypes)
       .expect(400)
 
@@ -39,7 +39,7 @@ describe('Create user integration test', () => {
 
   it('Should not be able to create a user with username already exists', async () => {
     const response = await request(app)
-      .post('/users')
+      .post('/user')
       .send(user)
       .expect(409)
 
@@ -48,7 +48,7 @@ describe('Create user integration test', () => {
 
   it('Should not be able to create a user with email already exists', async () => {
     const response = await request(app)
-      .post('/users')
+      .post('/user')
       .send({ ...user, username: 'newUserName' })
       .expect(409)
 

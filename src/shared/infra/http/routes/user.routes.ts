@@ -7,8 +7,10 @@ const userRoutes = Router()
 
 userRoutes.route('/')
   .post(createUserController.handle)
+  // .get() // Rota para o Menu Depois do LOGIN
 
 userRoutes.route('/login')
   .post(createUserTokensController.handle)
+  // .get() // Rota par o LOGIN
 
 export default userRoutes

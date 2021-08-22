@@ -23,7 +23,7 @@ describe('Create user tokens integration test', () => {
 
   it('Should be able to get a user tokens', async () => {
     const response = await request(app)
-      .post('/users/login')
+      .post('/user/login')
       .auth(user.email, user.password)
       .expect(200)
 
@@ -33,7 +33,7 @@ describe('Create user tokens integration test', () => {
 
   it('Should not be able to get a user tokens if no has authorization field', async () => {
     const response = await request(app)
-      .post('/users/login')
+      .post('/user/login')
       .expect(400)
 
     expect(response.body)
@@ -42,7 +42,7 @@ describe('Create user tokens integration test', () => {
 
   it('Should not be able to get a user tokens if authorization no has Basic Auth', async () => {
     const response = await request(app)
-      .post('/users/login')
+      .post('/user/login')
       .set('Authorization', 'Bearer ...')
       .expect(400)
 
@@ -52,7 +52,7 @@ describe('Create user tokens integration test', () => {
 
   it('Should not be able to get a user tokens with invalid email', async () => {
     const response = await request(app)
-      .post('/users/login')
+      .post('/user/login')
       .auth('invalid@mail.com', user.password)
       .expect(401)
 
@@ -62,7 +62,7 @@ describe('Create user tokens integration test', () => {
 
   it('Should not be able to get a user tokens with invalid password', async () => {
     const response = await request(app)
-      .post('/users/login')
+      .post('/user/login')
       .auth(user.email, 'invalidPassword')
       .expect(401)
 
